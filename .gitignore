@@ -34,3 +34,6 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+Assets/Scenes/testStage.unity
+Assets/MORPH3D/Content/Packages/Editor.meta
+Assets/MORPH3D/Content/Packages/Core.unitypackage.meta
