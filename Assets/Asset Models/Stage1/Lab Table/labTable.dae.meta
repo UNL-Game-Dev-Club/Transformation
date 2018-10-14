@@ -58,6 +58,16 @@ ModelImporter:
     4300014: ID64
     4300016: ID72
     4300018: ID80
+    6400000: ID16
+    6400002: ID24
+    6400004: ID32
+    6400006: ID40
+    6400008: ID48
+    6400010: ID56
+    6400012: ID64
+    6400014: ID72
+    6400016: ID80
+    6400018: //RootNode
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -91,7 +101,7 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
-    addColliders: 0
+    addColliders: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
