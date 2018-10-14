@@ -19645,6 +19645,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a11664e742e986b48886fe3dd3923829, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  playerPos: {x: 0, y: 0, z: 0}
+  playerPos_CameraTarget: {x: 0, y: 0, z: 0}
+  thisPos: {x: 0, y: 0, z: 0}
 --- !u!1 &507982800
 GameObject:
   m_ObjectHideFlags: 0
@@ -44088,7 +44092,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1146537174}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d393919279558824f91fc38e682c4617, type: 3}
   m_Name: 
@@ -45356,7 +45360,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1185026529
 RectTransform:
   m_ObjectHideFlags: 0
@@ -64299,7 +64303,7 @@ GameObject:
   - component: {fileID: 1715048278}
   - component: {fileID: 1715048277}
   - component: {fileID: 1715048276}
-  - component: {fileID: 1715048280}
+  - component: {fileID: 1715048281}
   m_Layer: 0
   m_Name: Zombie (3)
   m_TagString: Zombie
@@ -64388,7 +64392,7 @@ Animator:
   m_GameObject: {fileID: 1715048274}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: fe2eb0b4e90413643a3ddc78c368140f, type: 3}
-  m_Controller: {fileID: 9100000, guid: e10558744504b244599302a4ca2e3be3, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -64397,18 +64401,17 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!65 &1715048280
-BoxCollider:
+--- !u!114 &1715048281
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1715048274}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 8.977672, y: 1.6181331, z: 8.977672}
-  m_Center: {x: 0, y: 0.5924127, z: 0}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473f7af4fc3ae8d4e8ae5a5592cc5718, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1715193934
 GameObject:
   m_ObjectHideFlags: 0
@@ -78352,7 +78355,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2086309292}
   m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f307e4577fec641bf9a3036ae77103cd, type: 3}
+  m_Script: {fileID: 11500000, guid: 85919009da4e2a8468bfd7ccd18750ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   startingHealth: 100
@@ -78370,9 +78373,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 2086309292}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af9616ced596d7f4b8a8353009f22a9a, type: 3}
+  m_Script: {fileID: 11500000, guid: c4982082a1a8b6348b90502128cd7a70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!135 &2086309295
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2086309292}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.1128564
+  m_Center: {x: 0, y: 0.6128564, z: 0}
 --- !u!1 &2086397453
 GameObject:
   m_ObjectHideFlags: 0

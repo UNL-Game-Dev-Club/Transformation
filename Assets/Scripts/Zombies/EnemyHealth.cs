@@ -24,8 +24,10 @@ public class EnemyHealth : MonoBehaviour {
         {
             DropLoot();
 
+            Debug.Log("Killed " + this.name);
             Destroy(this.gameObject);
         }
+        Debug.Log("Health now at " + health);
     }
 
     public void DropLoot()
