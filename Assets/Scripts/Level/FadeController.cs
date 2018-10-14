@@ -11,8 +11,8 @@ public class FadeController : MonoBehaviour {
     Image fadeImageIMG;
     //Image fadeBackgroundIMG;
     float i;
-    //int x = 450;
-    int x = 150;
+    int x = 450;
+    //int x = 100;
 
     // Use this for initialization
     void Start () {

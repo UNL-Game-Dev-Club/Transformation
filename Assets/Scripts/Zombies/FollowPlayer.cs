@@ -18,24 +18,35 @@ public class FollowPlayer : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        playerPos = player.transform.position;
+        isFollowingPlayer = CanSeePlayer();
+        FollowThePlayer(false);
+	}
+
+    public void FollowThePlayer(bool isFollowing)
+    {
+        if (isFollowing)
+        {
+            transform.LookAt(player.transform);
+            transform.Translate((player.transform.position - transform.position).normalized * 0.05f);
+        }
+    }
+
+    public bool CanSeePlayer()
+    {
+        playerPos = GameObject.Find("Player").transform.position;
         thisPos = transform.position;
 
         float hypotenuse = Mathf.Sqrt(Mathf.Pow((playerPos.y - thisPos.y), 2) + Mathf.Pow((playerPos.x - thisPos.x), 2));
 
         if (hypotenuse <= 5.0f)
         {
-            isFollowingPlayer = true;
+            return true;
         }
         else if (hypotenuse >= 15.0f)
         {
-            isFollowingPlayer = false;
+            return false;
         }
 
-        if (isFollowingPlayer)
-        {
-            transform.LookAt(player.transform);
-            transform.Translate((player.transform.position - transform.position).normalized * 0.05f);
-        }
-	}
+        return false;
+    }
 }
