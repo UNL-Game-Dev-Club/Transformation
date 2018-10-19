@@ -60,7 +60,7 @@ public class IntroText : MonoBehaviour {
         else
         {
             System.Threading.Thread.Sleep(3000);
-            SceneManager.LoadScene("stage1");
+            SceneManager.LoadScene("testStage");
         }
 	}
 

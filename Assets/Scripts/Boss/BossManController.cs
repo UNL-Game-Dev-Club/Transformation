@@ -58,7 +58,7 @@ public class BossManController : MonoBehaviour {
         // Check if sees the player
         seePlayer = CanSeePlayer();
 
-        Debug.Log("Can see the player? " + seePlayer);
+        //Debug.Log("Can see the player? " + seePlayer);
 
         if (seePlayer)
         {
@@ -68,7 +68,7 @@ public class BossManController : MonoBehaviour {
         else
         {
             isMoving = !NearDestination(translationDestination);
-            Debug.Log("is moving ? " + isMoving);
+            //Debug.Log("is moving ? " + isMoving);
 
             if (!isMoving)
             {
@@ -79,7 +79,7 @@ public class BossManController : MonoBehaviour {
 
                 Vector3 destDiff = (randomDest - pos).normalized * 0.05f;
 
-                Debug.Log("Diff = " + destDiff);
+                //Debug.Log("Diff = " + destDiff);
 
                 transform.Translate(destDiff);
             }

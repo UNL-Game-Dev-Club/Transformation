@@ -11,8 +11,8 @@ public class FadeController : MonoBehaviour {
     Image fadeImageIMG;
     //Image fadeBackgroundIMG;
     float i;
-    int x = 450;
-    //int x = 100;
+    //int x = 450;
+    int x = 100;
 
     // Use this for initialization
     void Start () {
@@ -41,6 +41,7 @@ public class FadeController : MonoBehaviour {
         if (i <= 0)
         {
             Destroy(fadeImage.gameObject);
+            Destroy(GameObject.Find("Loading").gameObject);
             Destroy(this);
         }
 	}
