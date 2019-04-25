@@ -11,6 +11,7 @@ public class HappyEndSceneText : MonoBehaviour
     Text whereAmI;
     //float delay = 0.1f;
     int sleepDelay = 75;
+    float secondsDelay = 0.075f;
     string text;
     string text2;
     string text3;
@@ -19,6 +20,9 @@ public class HappyEndSceneText : MonoBehaviour
     bool typing3;
 
     int textIndex;
+
+    Coroutine currentCoroutine;
+    bool coroutineRunning;
 
     // Use this for initialization
     void Start()
@@ -39,7 +43,25 @@ public class HappyEndSceneText : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (typing)
+        if (coroutineRunning == false)
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                if (whereAmI.text == "Thank you for playing!")
+                {
+                    SceneManager.LoadScene("Credits");
+                }
+                else
+                {
+                    introText.text = "";
+                    whereAmI.text = "";
+
+                    whereAmI.text = "Thank you for playing!";
+                }
+            }
+        }
+
+        /*if (typing)
         {
             introText.text += text[textIndex++];
             if (textIndex == text.Length)
@@ -78,10 +100,42 @@ public class HappyEndSceneText : MonoBehaviour
             {
                 SceneManager.LoadScene("Credits");
             }
+        }*/
+
+
+    }
+
+    IEnumerator DisplayText(string t1, string t2)
+    {
+        coroutineRunning = true;
+        int text1Index = 0;
+        int text2Index = 0;
+
+        introText.text = "";
+        whereAmI.text = "";
+
+        while (text1Index < t1.Length)
+        {
+            introText.text += t1[text1Index++];
+
+            yield return new WaitForSeconds(secondsDelay);
         }
+
+        yield return new WaitForSeconds(3);
+
+        while (text2Index < t2.Length)
+        {
+            whereAmI.text += t2[text2Index++];
+
+            yield return new WaitForSeconds(secondsDelay * 2);
+        }
+
+        yield return new WaitForSeconds(2);
+        coroutineRunning = false;
     }
 
     void Initialize()
     {
+        currentCoroutine = StartCoroutine(DisplayText(text, text2));
     }
 }

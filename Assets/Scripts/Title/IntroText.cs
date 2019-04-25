@@ -10,6 +10,7 @@ public class IntroText : MonoBehaviour {
     Text whereAmI;
     //float delay = 0.1f;
     int sleepDelay = 75;
+    float secondsDelay = 0.075f;
     string text;
     string text2;
     string text3;
@@ -36,7 +37,7 @@ public class IntroText : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (typing)
+        /*if (typing)
         {
             introText.text += text[textIndex++];
             if (textIndex == text.Length)
@@ -61,10 +62,39 @@ public class IntroText : MonoBehaviour {
         {
             System.Threading.Thread.Sleep(3000);
             SceneManager.LoadScene("testStage");
-        }
+        }*/
 	}
+
+    IEnumerator DisplayText(string t1, string t2)
+    {
+        int text1Index = 0;
+        int text2Index = 0;
+
+        introText.text = "";
+        whereAmI.text = "";
+
+        while (text1Index < t1.Length)
+        {
+            introText.text += t1[text1Index++];
+
+            yield return new WaitForSeconds(secondsDelay);
+        }
+
+        yield return new WaitForSeconds(3);
+
+        while (text2Index < t2.Length)
+        {
+            whereAmI.text += t2[text2Index++];
+
+            yield return new WaitForSeconds(secondsDelay * 2);
+        }
+
+        yield return new WaitForSeconds(2);
+        SceneManager.LoadScene("testStage");
+    }
 
     void Initialize()
     {
+        StartCoroutine(DisplayText(text, text2));
     }
 }

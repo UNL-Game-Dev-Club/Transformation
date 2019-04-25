@@ -14,6 +14,8 @@ public class FadeController : MonoBehaviour {
     //int x = 450;
     int x = 100;
 
+    float fadeSeconds = 8f;
+
     // Use this for initialization
     void Start () {
         fadeImage = GameObject.Find("Fade");
@@ -23,11 +25,13 @@ public class FadeController : MonoBehaviour {
         //fadeBackgroundIMG = fadeImage.GetComponent<Image>();
         //Debug.Log("FadeBackground is null? " + (fadeBackground == null || fadeBackgroundIMG == null));
         i = 1.0f;
+
+        StartCoroutine(Fade());
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        if (x > 0)
+        /*if (x > 0)
         {
             x--;
             return;
@@ -43,6 +47,31 @@ public class FadeController : MonoBehaviour {
             Destroy(fadeImage.gameObject);
             Destroy(GameObject.Find("Loading").gameObject);
             Destroy(this);
-        }
+        }*/
 	}
+
+    IEnumerator Fade()
+    {
+        Debug.Log("Starting wait for fade");
+        yield return new WaitForSeconds(fadeSeconds);
+
+        Debug.Log("Starting fade");
+        Color c = fadeImageIMG.color;
+        c.a = i;
+
+        while (i > 0.0f)
+        {
+            float deltaSec = 0.05f;
+            yield return new WaitForSeconds(deltaSec);
+            i -= deltaSec;
+
+            c.a = i;
+            fadeImageIMG.color = c;
+        }
+
+        Debug.Log("Done with fade");
+        Destroy(fadeImage.gameObject);
+        Destroy(GameObject.Find("Loading").gameObject);
+        Destroy(this);
+    }
 }
