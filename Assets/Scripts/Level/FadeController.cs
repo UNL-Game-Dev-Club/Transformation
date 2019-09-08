@@ -6,43 +6,43 @@ using UnityEngine.UI;
 
 public class FadeController : MonoBehaviour {
 
-    GameObject fadeImage;
+    [SerializeField] GameObject fadeImage;
     GameObject fadeBackground;
-    Image fadeImageIMG;
-    //Image fadeBackgroundIMG;
+    RawImage fadeImageIMG;
     float i;
-    //int x = 450;
     int x = 100;
+
+    [SerializeField] GameObject loadingText;
 
     // Use this for initialization
     void Start () {
-        fadeImage = GameObject.Find("Fade");
-        fadeImageIMG = fadeImage.GetComponent<Image>();
-        Debug.Log("Fade is null? " + (fadeImage == null || fadeImageIMG == null));
-        //fadeBackground = GameObject.Find("FadeBackground");
-        //fadeBackgroundIMG = fadeImage.GetComponent<Image>();
-        //Debug.Log("FadeBackground is null? " + (fadeBackground == null || fadeBackgroundIMG == null));
+        fadeImageIMG = fadeImage.GetComponent<RawImage>();
         i = 1.0f;
+
+        StartCoroutine(FadeImageOut());
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        if (x > 0)
-        {
-            x--;
-            return;
-        }
-        Color c = fadeImageIMG.color;
-        c.a = i;
-        fadeImageIMG.color = c;
-        //fadeBackgroundIMG.color = c;
-        i -= Time.deltaTime / 1.5f;
 
-        if (i <= 0)
-        {
-            Destroy(fadeImage.gameObject);
-            Destroy(GameObject.Find("Loading").gameObject);
-            Destroy(this);
-        }
 	}
+
+    IEnumerator FadeImageOut()
+    {
+        yield return new WaitForSeconds(7.8f);
+
+        Color start = fadeImageIMG.color;
+        Color end = fadeImageIMG.color;
+        end.a = 0;
+        Destroy(loadingText.gameObject);
+
+        for (i = 0.0f; i < 1.5f; i += Time.deltaTime)
+        {
+            fadeImageIMG.color = Color.Lerp(start, end, i / 1.5f);
+            yield return new WaitForEndOfFrame();
+        }
+
+        Destroy(fadeImage.gameObject);
+        Destroy(this);
+    }
 }

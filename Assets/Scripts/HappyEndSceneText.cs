@@ -39,29 +39,7 @@ public class HappyEndSceneText : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (typing)
-        {
-            introText.text += text[textIndex++];
-            if (textIndex == text.Length)
-            {
-                typing = false;
-                System.Threading.Thread.Sleep(1500);
-                textIndex = 0;
-            }
-
-            System.Threading.Thread.Sleep(sleepDelay);
-        }
-        else if (typing2)
-        {
-            whereAmI.text += text2[textIndex++];
-            System.Threading.Thread.Sleep(sleepDelay * 3);
-            if (textIndex == text2.Length)
-            {
-                textIndex = 0;
-                typing2 = false;
-            }
-        }
-        else
+        if (!typing || !typing2)
         {
             if (Input.GetMouseButtonDown(0))
             {
@@ -83,5 +61,23 @@ public class HappyEndSceneText : MonoBehaviour
 
     void Initialize()
     {
+        StartCoroutine(DisplayWhereAmI(text, text2));
+    }
+
+    IEnumerator DisplayWhereAmI(string displayText, string whereAmIText)
+    {
+        foreach (char c in displayText)
+        {
+            introText.text += c;
+            yield return new WaitForSeconds(0.075f);
+        }
+
+        foreach (char c in whereAmIText)
+        {
+            whereAmI.text += c;
+            yield return new WaitForSeconds(0.075f * 3);
+        }
+
+        yield return new WaitForSeconds(1);
     }
 }

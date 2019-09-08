@@ -32,39 +32,52 @@ public class IntroText : MonoBehaviour {
         textIndex = 0;
 
         Initialize();
-	}
-	
-	// Update is called once per frame
-	void Update () {
-        if (typing)
-        {
-            introText.text += text[textIndex++];
-            if (textIndex == text.Length)
-            {
-                typing = false;
-                System.Threading.Thread.Sleep(1500);
-                textIndex = 0;
-            }
+    }
 
-            System.Threading.Thread.Sleep(sleepDelay);
-        }
-        else if (typing2)
+    // Update is called once per frame
+    void Update()
+    {
+        if (!typing || !typing2)
         {
-            whereAmI.text += text2[textIndex++];
-            System.Threading.Thread.Sleep(sleepDelay * 3);
-            if (textIndex == text2.Length)
+            if (Input.GetMouseButtonDown(0))
             {
-                typing2 = false;
+                introText.text = "";
+                whereAmI.text = "";
+
+                whereAmI.text = "Thank you for playing!";
             }
         }
-        else
+
+        if (whereAmI.text == "Thank you for playing!")
         {
-            System.Threading.Thread.Sleep(3000);
-            SceneManager.LoadScene("testStage");
+            if (Input.GetMouseButtonDown(0))
+            {
+                SceneManager.LoadScene("Credits");
+            }
         }
-	}
+    }
 
     void Initialize()
     {
+        StartCoroutine(DisplayWhereAmI(text, text2));
+    }
+
+    IEnumerator DisplayWhereAmI(string displayText, string whereAmIText)
+    {
+        foreach (char c in displayText)
+        {
+            introText.text += c;
+            yield return new WaitForSeconds(0.075f);
+        }
+
+        foreach (char c in whereAmIText)
+        {
+            whereAmI.text += c;
+            yield return new WaitForSeconds(0.075f * 3);
+        }
+
+        yield return new WaitForSeconds(1);
+
+        SceneManager.LoadScene("testStage");
     }
 }
