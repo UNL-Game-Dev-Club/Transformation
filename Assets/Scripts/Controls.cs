@@ -19,13 +19,17 @@ public class Controls : MonoBehaviour
             Debug.Log("Joystick: " + n);
         }
 
-        if (names[0] != "")
+        if (names == null)
         {
-            controlsText.text = joystickControls;
+            controlsText.text = keyboardControls;
+        }
+        else if (names[0] == "")
+        {
+            controlsText.text = keyboardControls;
         }
         else
         {
-            controlsText.text = keyboardControls;
+            controlsText.text = joystickControls;
         }
     }
 

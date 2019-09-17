@@ -14,9 +14,7 @@ public class BadEndSceneText : MonoBehaviour
     string text;
     string text2;
     string text3;
-    bool typing;
-    bool typing2;
-    bool typing3;
+    bool clickable;
 
     int textIndex;
 
@@ -29,8 +27,7 @@ public class BadEndSceneText : MonoBehaviour
         whereAmI.text = "";
         text = "(I failed to ensure my friend's safety, and failed to escape myself.)\n\nCongratulations soldier. The project is now complete!";
         text2 = "WHAT AM I? A MONSTER?!?";
-        typing = true;
-        typing2 = true;
+        clickable = false;
         textIndex = 0;
 
         Initialize();
@@ -39,49 +36,48 @@ public class BadEndSceneText : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (typing)
+        if (clickable)
         {
-            introText.text += text[textIndex++];
-            if (textIndex == text.Length)
+            if (introText.text == text)
             {
-                typing = false;
-                System.Threading.Thread.Sleep(1500);
-                textIndex = 0;
-            }
+                if (Input.GetMouseButtonDown(0))
+                {
+                    introText.text = "";
+                    whereAmI.text = "";
 
-            System.Threading.Thread.Sleep(sleepDelay);
-        }
-        else if (typing2)
-        {
-            whereAmI.text += text2[textIndex++];
-            System.Threading.Thread.Sleep(sleepDelay * 3);
-            if (textIndex == text2.Length)
-            {
-                textIndex = 0;
-                typing2 = false;
+                    whereAmI.text = "Thank you for playing!";
+                }
             }
-        }
-        else
-        {
-            if (Input.GetMouseButtonDown(0))
+            else if (whereAmI.text == "Thank you for playing!")
             {
-                introText.text = "";
-                whereAmI.text = "";
-
-                whereAmI.text = "Thank you for playing!";
-            }
-        }
-
-        if (whereAmI.text == "Thank you for playing!")
-        {
-            if (Input.GetMouseButtonDown(0))
-            {
-                SceneManager.LoadScene("Credits");
+                if (Input.GetMouseButtonDown(0))
+                {
+                    SceneManager.LoadScene("Credits");
+                }
             }
         }
     }
 
     void Initialize()
     {
+        StartCoroutine(DisplayWhereAmI(text, text2));
+    }
+
+    IEnumerator DisplayWhereAmI(string displayText, string whereAmIText)
+    {
+        foreach (char c in displayText)
+        {
+            introText.text += c;
+            yield return new WaitForSeconds(0.075f);
+        }
+
+        foreach (char c in whereAmIText)
+        {
+            whereAmI.text += c;
+            yield return new WaitForSeconds(0.075f * 3);
+        }
+
+        yield return new WaitForSeconds(1);
+        clickable = true;
     }
 }

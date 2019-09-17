@@ -19,7 +19,7 @@ public class IntroText : MonoBehaviour {
     int textIndex;
 
     // Use this for initialization
-    void Start () {
+    void Start() {
         introText = GameObject.Find("IntroText").GetComponent<Text>();
         whereAmI = GameObject.Find("WhereAmI").GetComponent<Text>();
         introText.text = "";
@@ -30,6 +30,12 @@ public class IntroText : MonoBehaviour {
         typing = true;
         typing2 = true;
         textIndex = 0;
+
+        if (SceneManager.GetActiveScene().name.ToLower().Contains("end"))
+        {
+            typing = false;
+            typing2 = false;
+        }
 
         Initialize();
     }
